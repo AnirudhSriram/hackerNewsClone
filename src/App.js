@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useEffect} from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
-
+import Header from './header';
+import Topics from './topics';
 function App() {
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `Hacker News`;
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      {/* <Topics /> */}
+      <Router>
+        <div>
+          <nav>
+            <Link to="/topics">Topics</Link>
+          </nav>
+        </div>
+        <Switch>
+          <Route path="/topics">
+            <Topics/>
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
 
 export default App;
+function Home() {
+  return <div>
+    
+    <Topics />
+    </div>;
+}

@@ -1,0 +1,12 @@
+.title{
+  align-self: flex-start;
+}
+
+.searchBar {
+    height: 5vh;
+    width: 50vw;
+    border-radius: 10px;
+    border:1px solid black;
+    font-size: 30px;
+    padding: 10px;
+}

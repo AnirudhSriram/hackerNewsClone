@@ -1,0 +1,18 @@
+.title{
+    font-size: 5vh;
+}
+.ul{
+    
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+}
+ul li{
+    background: #F6F6EF;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+    
+}
