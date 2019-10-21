@@ -2,7 +2,6 @@ import React  from 'react';
 import axios from 'axios';
 import './topics.css';
 import Topic from './topic';
-import { render } from 'react-dom';
 class Topics extends React.Component {
     constructor(props){
             super(props);
@@ -18,7 +17,6 @@ class Topics extends React.Component {
             .then(result => {
                 ids = result.data;
                 ids.splice(10,ids.length-1);
-                console.log(ids);
             })
             .then(()=>{
                 ids.forEach((item)=> {
@@ -26,16 +24,15 @@ class Topics extends React.Component {
                     .then(result => {
                         const temp = this.state.topics;
                         temp.push(result.data);
-                        console.log(temp)
                         this.setState({
                             topics:temp
                         })
-                        console.log(this.state.topics)
                     })
                 })
             })
             .catch(err => {
-                err = err;
+                this.setState({
+                    err : err})
             }).finally(()=>{
                 
             });
@@ -49,7 +46,7 @@ class Topics extends React.Component {
     render(){
         var render = []
         this.state.topics.forEach(item => {
-            render.push(<li key={item.id}><Topic details={item} /></li>)
+            render.push(<li key={item.id}><Topic  details={item} /></li>)
         });
         return (<div>
             <h1 className="title">Topics</h1>

@@ -15,7 +15,7 @@ function App() {
   });
   return (
     <div className="App">
-      <Header />
+    
       {/* <Topics /> */}
       <Router>
         <div>
@@ -39,7 +39,7 @@ function App() {
 export default App;
 function Home() {
   return <div>
-    
+      <Header />
     <Topics />
     </div>;
 }
