@@ -1,6 +1,8 @@
 import React from 'react';
 import './header.css';
-const Header = ()=> {
+import Search from './search';
+
+const Header = (props)=> {
 
     return (
         <header className="App-header">
@@ -8,7 +10,7 @@ const Header = ()=> {
                 <h1 className="title">Hacker News</h1>
         </div>
             <div>
-                <input className="searchBar" placeholder="search"/>
+              <Search />
             </div>
             
         </header>

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,38 +8,107 @@ import {
 import './App.css';
 import Header from './header';
 import Topics from './topics';
-function App() {
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `Hacker News`;
-  });
-  return (
-    <div className="App">
-    
-      {/* <Topics /> */}
-      <Router>
-        <div>
-          <nav>
-            <Link to="/topics">Topics</Link>
-          </nav>
-        </div>
-        <Switch>
-          <Route path="/topics">
-            <Topics/>
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+import MyContext from './context';
+
+class MyProvider extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      topics : [],
+      searchQuery : '',
+      allTopics : []
+    }
+  }
+
+  render() {
+    const setSearchQuery = (data)=> {
+      if(data !=''){
+        this.setState({
+          searchQuery : data,
+          topics : filterTopics(data)
+        })
+      }else {
+        this.setState({
+          searchQuery : '',
+          topics : this.state.allTopics
+        })
+      }
+
+    }
+
+    const filterTopics = (data) => {
+      let filterdTopics = []
+      let topics = this.state.topics;
+
+      topics.forEach((item)=> {
+        let tempstr = item.title;
+        tempstr = tempstr.toLowerCase();
+        if(tempstr.includes(data.toLowerCase())){
+            filterdTopics.push(item);
+            this.setState({
+              topics : filterdTopics
+            })
+        }
+      })
+        return filterdTopics;
+      
+    }
+
+    const setTopics = (data)=> {
+      this.setState({
+        allTopics : data,
+        topics: data
+      })
+     
+    }
+    return (
+      <MyContext.Provider value={{
+        state : this.state,
+        setSearchQuery : setSearchQuery,
+        setTopics : setTopics
+      }}>
+        {this.props.children}
+      </MyContext.Provider>
+    )
+
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+
+      <div className="App">
+        <Router>
+          <div>
+            <nav>
+              <Link to="/topics">Topics</Link>
+            </nav>
+          </div>
+          <Switch>
+            <Route path="/topics">
+              <Topics />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+
+    );
+  }
+
 }
 
 export default App;
+
 function Home() {
-  return <div>
+
+  return <MyProvider>
+    <div>
       <Header />
-    <Topics />
+      <Topics />
     </div>;
+  </MyProvider>
 }
