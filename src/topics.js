@@ -11,8 +11,9 @@ class Topics extends React.Component {
             random: true
         }
     }
+
     componentDidUpdate(prevProps, prevState) {
-        if (this.context.state.topics != prevState.topics) {
+        if (!Object.is(this.context.state.topics, prevState.topics)) {
             this.setState({
                 topics: this.context.state.topics
             })

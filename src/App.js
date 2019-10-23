@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,26 +11,26 @@ import Topics from './topics';
 import MyContext from './context';
 
 class MyProvider extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      topics : [],
-      searchQuery : '',
-      allTopics : []
+    this.state = {
+      topics: [],
+      searchQuery: '',
+      allTopics: []
     }
   }
 
   render() {
-    const setSearchQuery = (data)=> {
-      if(data !=''){
+    const setSearchQuery = (data) => {
+      if (data !== '') {
         this.setState({
-          searchQuery : data,
-          topics : filterTopics(data)
+          searchQuery: data,
+          topics: filterTopics(data)
         })
-      }else {
+      } else {
         this.setState({
-          searchQuery : '',
-          topics : this.state.allTopics
+          searchQuery: '',
+          topics: this.state.allTopics
         })
       }
 
@@ -40,32 +40,32 @@ class MyProvider extends React.Component {
       let filterdTopics = []
       let topics = this.state.topics;
 
-      topics.forEach((item)=> {
+      topics.forEach((item) => {
         let tempstr = item.title;
         tempstr = tempstr.toLowerCase();
-        if(tempstr.includes(data.toLowerCase())){
-            filterdTopics.push(item);
-            this.setState({
-              topics : filterdTopics
-            })
+        if (tempstr.includes(data.toLowerCase())) {
+          filterdTopics.push(item);
+          this.setState({
+            topics: filterdTopics
+          })
         }
       })
-        return filterdTopics;
-      
+      return filterdTopics;
+
     }
 
-    const setTopics = (data)=> {
+    const setTopics = (data) => {
       this.setState({
-        allTopics : data,
+        allTopics: data,
         topics: data
       })
-     
+
     }
     return (
       <MyContext.Provider value={{
-        state : this.state,
-        setSearchQuery : setSearchQuery,
-        setTopics : setTopics
+        state: this.state,
+        setSearchQuery: setSearchQuery,
+        setTopics: setTopics
       }}>
         {this.props.children}
       </MyContext.Provider>
@@ -80,15 +80,7 @@ class App extends React.Component {
 
       <div className="App">
         <Router>
-          <div>
-            <nav>
-              <Link to="/topics">Topics</Link>
-            </nav>
-          </div>
           <Switch>
-            <Route path="/topics">
-              <Topics />
-            </Route>
             <Route path="/">
               <Home />
             </Route>
