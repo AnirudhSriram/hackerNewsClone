@@ -101,6 +101,6 @@ function Home() {
     <div>
       <Header />
       <Topics />
-    </div>;
+    </div>
   </MyProvider>
 }

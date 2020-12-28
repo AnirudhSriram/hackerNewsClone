@@ -70,7 +70,7 @@ class Topics extends React.Component {
             render.push(<li key={item.id}><Topic details={item} /></li>)
         });
         return (<div>
-            <h1 className="title">Topics</h1>
+            <h2 className="title">Topics</h2>
             <ul className="ul">
                 {render}
             </ul>

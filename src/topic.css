@@ -1,15 +1,27 @@
 .li{
-    background: lightblue;
+    background: #BD7BDA;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
     text-align: left;
-    
+    word-wrap: break-word;
+    color: black;
+}
+
+.li a{
+    color: black;
 }
 .liPopular {
-    background:lime;
+    background:#AEDB74;
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
     text-align: left;
+    word-wrap: break-word;
+    color: black;
 }
+
+.liPopular a { 
+    color : black;
+}
+
